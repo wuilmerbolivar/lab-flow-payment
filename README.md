@@ -75,6 +75,54 @@ Proyecto en fase inicial de fundación.
 El primer objetivo técnico será reproducir el Quickstart oficial de Flow
 utilizando JavaScript/Node.js contra el ambiente Sandbox.
 
+## Laboratorios
+
+### LAB-001 — Reproducir Quickstart de Flow con Node.js
+
+Estado: **Completado**
+
+Primer laboratorio del proyecto. Se reprodujo el flujo básico de creación de
+una orden utilizando Node.js contra Flow Sandbox.
+
+Resultados principales:
+
+- Configuración de credenciales mediante variables de entorno.
+- Construcción de parámetros.
+- Generación de firma HMAC-SHA256.
+- Comunicación con `payment/create`.
+- Análisis de respuestas HTTP exitosas y errores.
+- Creación de una orden válida en PEN.
+- Obtención de `token`, `url` y `flowOrder`.
+- Acceso al Checkout Sandbox.
+- Exploración de medios de pago.
+- Exploración del simulador de pagos.
+- Observación del comportamiento de `urlReturn`.
+
+Documentación:
+
+- [Validación de creación de orden](laboratorios/001-quickstart/001-validacion-creacion-orden.md)
+- [Exploración del Checkout](laboratorios/002-checkout/002-exploracion-checkout.md)
+
+### LAB-003 — Servidor HTTP local
+
+Estado: **En progreso**
+
+Experimentación inicial con un servidor HTTP construido directamente con las
+APIs nativas de Node.js.
+
+Objetivo actual:
+
+- Comprender requests HTTP.
+- Comprender responses HTTP.
+- Diferenciar métodos HTTP.
+- Recibir `POST`.
+- Analizar headers.
+- Recibir y procesar el body.
+- Comprender `application/x-www-form-urlencoded`.
+
+El laboratorio continuará evolucionando hacia la recepción de comunicaciones
+relacionadas con Flow Sandbox.
+
 ## Licencia
 
 Este proyecto se distribuye bajo la licencia MIT.
