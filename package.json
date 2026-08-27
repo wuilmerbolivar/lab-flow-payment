@@ -4,7 +4,8 @@
   "description": "Laboratorio personal de aprendizaje, investigación y experimentación técnica orientado a comprender la integración, operación, diagnóstico y evolución de soluciones basadas en plataformas de pago y APIs.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lab:001": "node laboratorios/001-quickstart/main.js"
+    "lab:001": "node laboratorios/001-quickstart/main.js",
+    "lab:003": "node laboratorios/003-endpoint-http/main.js"
   },
   "repository": {
     "type": "git",
