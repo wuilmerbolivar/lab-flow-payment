@@ -5,7 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lab:001": "node laboratorios/001-quickstart/main.js",
-    "lab:003": "node laboratorios/003-endpoint-http/main.js"
+    "lab:003": "node laboratorios/003-endpoint-http/main.js",
+    "lab:004": "node laboratorios/004-callback-flow/main.js",
+    "lab:005": "node laboratorios/005-consulta-estado/main.js"
   },
   "repository": {
     "type": "git",
