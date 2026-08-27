@@ -1,0 +1,21 @@
+{
+  "name": "lab-flow-payment",
+  "version": "1.0.0",
+  "description": "Laboratorio personal de aprendizaje, investigación y experimentación técnica orientado a comprender la integración, operación, diagnóstico y evolución de soluciones basadas en plataformas de pago y APIs.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lab:001": "node laboratorios/001-quickstart/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@wuilmerbolivar:wuilmerbolivar/lab-flow-payment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.20.0",
+    "dotenv": "^17.4.2"
+  }
+}
