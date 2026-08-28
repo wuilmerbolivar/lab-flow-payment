@@ -26,6 +26,7 @@ const params = {
   subject: 'Laboratorio Flow Payment',
   amount: 350,
   currency: 'PEN',
+  checkout_timeout: 30,
 };
 
 const sortedParams = Object.entries(params)
