@@ -1,0 +1,801 @@
+LAB-007 — Timeout de orden
+Log de experimentación
+Proyecto: lab-flow-payment
+Inicio del log: 2026-08-28 10:47:46
+
+
+============================================================
+
+[2026-08-28 10:47:49] LAB-007 — NUEVO EXPERIMENTO
+[2026-08-28 10:47:49] Timeout de la orden: 10
+[2026-08-28 10:47:49] Tiempo de espera: 10 segundos
+[2026-08-28 10:47:49] Inicio: 2026-08-28 10:47:49
+
+============================================================
+
+[2026-08-28 10:47:49] CREACIÓN DE NUEVA ORDEN
+[2026-08-28 10:47:49] Timeout solicitado: 10
+[2026-08-28 10:47:49] Ejecutando: CHECKOUT_TIMEOUT=10 npm run lab:001
+
+============================================================
+
+[2026-08-28 10:47:50] SALIDA COMPLETA DE LAB-001
+
+> lab-flow-payment@1.0.0 lab:001
+> node laboratorios/001-quickstart/main.js
+
+◇ injected env (2) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+LAB-001 — Quickstart Flow
+Orden: a8a36b54-294d-4fd3-8918-06915167c249
+Checkout timeout: 10 segundos
+Enviando solicitud a Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  token: '0A062702E7ACD6CDFF4D9B562F86279A918AB8EP',
+  url: 'https://sandbox.flow.cl/app/web/pay.php',
+  flowOrder: 9962344
+}
+Checkout: https://sandbox.flow.cl/app/web/pay.php?token=0A062702E7ACD6CDFF4D9B562F86279A918AB8EP
+
+============================================================
+
+[2026-08-28 10:47:50] Orden creada correctamente.
+[2026-08-28 10:47:50] commerceOrder: a8a36b54-294d-4fd3-8918-06915167c249
+[2026-08-28 10:47:50] flowOrder: 9962344
+[2026-08-28 10:47:50] token: 0A062702E7AC...
+[2026-08-28 10:47:50] checkout: https://sandbox.flow.cl/app/web/pay.php?token=0A062702E7ACD6CDFF4D9B562F86279A918AB8EP
+
+============================================================
+
+[2026-08-28 10:47:50] ESTADO INICIAL
+
+============================================================
+
+[2026-08-28 10:47:50] CONSULTA DE ESTADO
+[2026-08-28 10:47:50] Ejecutando LAB-005.
+[2026-08-28 10:47:51] SALIDA COMPLETA DE LAB-005
+
+> lab-flow-payment@1.0.0 lab:005
+> node laboratorios/005-consulta-estado/main.js
+
+◇ injected env (2) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+LAB-005 — Consulta de estado
+Token: 0A062702E7AC...
+Consultando Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  flowOrder: 9962344,
+  commerceOrder: 'a8a36b54-294d-4fd3-8918-06915167c249',
+  requestDate: '2026-08-28 11:47:50',
+  status: 1,
+  subject: 'Laboratorio Flow Payment',
+  currency: 'PEN',
+  amount: '350',
+  payer: 'wuilmeralexanderbolivar@gmail.com',
+  optional: null,
+  pending_info: { media: null, date: null },
+  paymentData: {
+    date: null,
+    media: null,
+    conversionDate: null,
+    conversionRate: null,
+    amount: null,
+    currency: null,
+    fee: null,
+    balance: null,
+    transferDate: null
+  },
+  merchantId: null
+}
+[2026-08-28 10:47:51] status detectado: 1
+[2026-08-28 10:47:51] Estado inicial registrado: 1
+
+============================================================
+
+[2026-08-28 10:47:51] CHECKOUT
+[2026-08-28 10:47:51] URL: https://sandbox.flow.cl/app/web/pay.php?token=0A062702E7ACD6CDFF4D9B562F86279A918AB8EP
+[2026-08-28 10:48:32] Checkout abierto por el operador.
+[2026-08-28 10:48:32] Hora de apertura: 2026-08-28 10:48:32
+
+============================================================
+
+[2026-08-28 10:48:32] ESPERANDO EXPIRACIÓN
+[2026-08-28 10:48:32] Inicio del cronómetro.
+[2026-08-28 10:48:32] Duración objetivo: 10 segundos.
+[2026-08-28 10:48:42] Cronómetro finalizado.
+[2026-08-28 10:48:42] Tiempo real transcurrido: 10 segundos.
+
+============================================================
+
+[2026-08-28 10:48:42] ESTADO POST-TIMEOUT
+
+============================================================
+
+[2026-08-28 10:48:42] CONSULTA DE ESTADO
+[2026-08-28 10:48:42] Ejecutando LAB-005.
+[2026-08-28 10:48:43] SALIDA COMPLETA DE LAB-005
+
+> lab-flow-payment@1.0.0 lab:005
+> node laboratorios/005-consulta-estado/main.js
+
+◇ injected env (2) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+LAB-005 — Consulta de estado
+Token: 0A062702E7AC...
+Consultando Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  flowOrder: 9962344,
+  commerceOrder: 'a8a36b54-294d-4fd3-8918-06915167c249',
+  requestDate: '2026-08-28 11:47:50',
+  status: 1,
+  subject: 'Laboratorio Flow Payment',
+  currency: 'PEN',
+  amount: '350',
+  payer: 'wuilmeralexanderbolivar@gmail.com',
+  optional: null,
+  pending_info: { media: null, date: null },
+  paymentData: {
+    date: null,
+    media: null,
+    conversionDate: null,
+    conversionRate: null,
+    amount: null,
+    currency: null,
+    fee: null,
+    balance: null,
+    transferDate: null
+  },
+  merchantId: null
+}
+[2026-08-28 10:48:43] status detectado: 1
+[2026-08-28 10:48:43] Estado final registrado: 1
+
+============================================================
+
+[2026-08-28 10:48:43] RESULTADO DEL EXPERIMENTO
+[2026-08-28 10:48:43] Timeout configurado: 10
+[2026-08-28 10:48:43] Tiempo esperado: 10s
+[2026-08-28 10:48:43] Estado inicial: 1
+[2026-08-28 10:48:43] Estado final: 1
+[2026-08-28 10:48:43] RESULTADO: NO SE OBSERVÓ CAMBIO DE ESTADO.
+[2026-08-28 10:48:43] Fin: 2026-08-28 10:48:43
+
+============================================================
+
+
+============================================================
+
+[2026-08-28 10:49:04] LAB-007 — NUEVO EXPERIMENTO
+[2026-08-28 10:49:04] Timeout de la orden: 10
+[2026-08-28 10:49:04] Tiempo de espera: 10 segundos
+[2026-08-28 10:49:04] Inicio: 2026-08-28 10:49:04
+
+============================================================
+
+[2026-08-28 10:49:04] CREACIÓN DE NUEVA ORDEN
+[2026-08-28 10:49:04] Timeout solicitado: 10
+[2026-08-28 10:49:04] Ejecutando: CHECKOUT_TIMEOUT=10 npm run lab:001
+
+============================================================
+
+[2026-08-28 10:49:05] SALIDA COMPLETA DE LAB-001
+
+> lab-flow-payment@1.0.0 lab:001
+> node laboratorios/001-quickstart/main.js
+
+◇ injected env (2) from .env // tip: ⌘ enable debugging { debug: true }
+LAB-001 — Quickstart Flow
+Orden: ac380d01-5eff-474d-9d79-4d6868c776cc
+Checkout timeout: 10 segundos
+Enviando solicitud a Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  token: 'D728C9FF21D7F6DA55FC2C9CA23E84440CAA6A4F',
+  url: 'https://sandbox.flow.cl/app/web/pay.php',
+  flowOrder: 9962355
+}
+Checkout: https://sandbox.flow.cl/app/web/pay.php?token=D728C9FF21D7F6DA55FC2C9CA23E84440CAA6A4F
+
+============================================================
+
+[2026-08-28 10:49:05] Orden creada correctamente.
+[2026-08-28 10:49:05] commerceOrder: ac380d01-5eff-474d-9d79-4d6868c776cc
+[2026-08-28 10:49:05] flowOrder: 9962355
+[2026-08-28 10:49:05] token: D728C9FF21D7...
+[2026-08-28 10:49:05] checkout: https://sandbox.flow.cl/app/web/pay.php?token=D728C9FF21D7F6DA55FC2C9CA23E84440CAA6A4F
+
+============================================================
+
+[2026-08-28 10:49:05] ESTADO INICIAL
+
+============================================================
+
+[2026-08-28 10:49:05] CONSULTA DE ESTADO
+[2026-08-28 10:49:05] Ejecutando LAB-005.
+[2026-08-28 10:49:06] SALIDA COMPLETA DE LAB-005
+
+> lab-flow-payment@1.0.0 lab:005
+> node laboratorios/005-consulta-estado/main.js
+
+◇ injected env (2) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+LAB-005 — Consulta de estado
+Token: D728C9FF21D7...
+Consultando Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  flowOrder: 9962355,
+  commerceOrder: 'ac380d01-5eff-474d-9d79-4d6868c776cc',
+  requestDate: '2026-08-28 11:49:05',
+  status: 1,
+  subject: 'Laboratorio Flow Payment',
+  currency: 'PEN',
+  amount: '350',
+  payer: 'wuilmeralexanderbolivar@gmail.com',
+  optional: null,
+  pending_info: { media: null, date: null },
+  paymentData: {
+    date: null,
+    media: null,
+    conversionDate: null,
+    conversionRate: null,
+    amount: null,
+    currency: null,
+    fee: null,
+    balance: null,
+    transferDate: null
+  },
+  merchantId: null
+}
+[2026-08-28 10:49:06] status detectado: 1
+[2026-08-28 10:49:06] Estado inicial registrado: 1
+
+============================================================
+
+[2026-08-28 10:49:06] CHECKOUT
+[2026-08-28 10:49:06] URL: https://sandbox.flow.cl/app/web/pay.php?token=D728C9FF21D7F6DA55FC2C9CA23E84440CAA6A4F
+[2026-08-28 10:49:27] Checkout abierto por el operador.
+[2026-08-28 10:49:27] Hora de apertura: 2026-08-28 10:49:27
+
+============================================================
+
+[2026-08-28 10:49:27] ESPERANDO EXPIRACIÓN
+[2026-08-28 10:49:27] Inicio del cronómetro.
+[2026-08-28 10:49:27] Duración objetivo: 10 segundos.
+[2026-08-28 10:49:37] Cronómetro finalizado.
+[2026-08-28 10:49:37] Tiempo real transcurrido: 10 segundos.
+
+============================================================
+
+[2026-08-28 10:49:37] ESTADO POST-TIMEOUT
+
+============================================================
+
+[2026-08-28 10:49:37] CONSULTA DE ESTADO
+[2026-08-28 10:49:37] Ejecutando LAB-005.
+[2026-08-28 10:49:38] SALIDA COMPLETA DE LAB-005
+
+> lab-flow-payment@1.0.0 lab:005
+> node laboratorios/005-consulta-estado/main.js
+
+◇ injected env (2) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+LAB-005 — Consulta de estado
+Token: D728C9FF21D7...
+Consultando Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  flowOrder: 9962355,
+  commerceOrder: 'ac380d01-5eff-474d-9d79-4d6868c776cc',
+  requestDate: '2026-08-28 11:49:05',
+  status: 4,
+  subject: 'Laboratorio Flow Payment',
+  currency: 'PEN',
+  amount: '350',
+  payer: 'wuilmeralexanderbolivar@gmail.com',
+  optional: null,
+  pending_info: { media: null, date: null },
+  paymentData: {
+    date: null,
+    media: null,
+    conversionDate: null,
+    conversionRate: null,
+    amount: null,
+    currency: null,
+    fee: null,
+    balance: null,
+    transferDate: null
+  },
+  merchantId: null
+}
+[2026-08-28 10:49:38] status detectado: 4
+[2026-08-28 10:49:38] Estado final registrado: 4
+
+============================================================
+
+[2026-08-28 10:49:38] RESULTADO DEL EXPERIMENTO
+[2026-08-28 10:49:38] Timeout configurado: 10
+[2026-08-28 10:49:38] Tiempo esperado: 10s
+[2026-08-28 10:49:38] Estado inicial: 1
+[2026-08-28 10:49:38] Estado final: 4
+[2026-08-28 10:49:38] RESULTADO: TRANSICIÓN 1 → 4 CONFIRMADA.
+[2026-08-28 10:49:38] Fin: 2026-08-28 10:49:38
+
+============================================================
+
+
+============================================================
+
+[2026-08-28 11:27:50] LAB-007 — NUEVO EXPERIMENTO
+[2026-08-28 11:27:50] Timeout de la orden: 50
+[2026-08-28 11:27:50] Tiempo de espera: 50 segundos
+[2026-08-28 11:27:50] Inicio: 2026-08-28 11:27:50
+
+============================================================
+
+[2026-08-28 11:27:50] CREACIÓN DE NUEVA ORDEN
+[2026-08-28 11:27:50] Timeout solicitado: 50
+[2026-08-28 11:27:50] Ejecutando: CHECKOUT_TIMEOUT=50 npm run lab:001
+
+============================================================
+
+[2026-08-28 11:27:51] SALIDA COMPLETA DE LAB-001
+
+> lab-flow-payment@1.0.0 lab:001
+> node laboratorios/001-quickstart/main.js
+
+◇ injected env (2) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+LAB-001 — Quickstart Flow
+Orden: e8b209a0-2753-4e95-8bda-0281033b5a73
+Checkout timeout: 50 segundos
+Enviando solicitud a Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  token: 'AFA17D00A28D8B6D160C767E0F5561F20540E3AY',
+  url: 'https://sandbox.flow.cl/app/web/pay.php',
+  flowOrder: 9962739
+}
+Checkout: https://sandbox.flow.cl/app/web/pay.php?token=AFA17D00A28D8B6D160C767E0F5561F20540E3AY
+
+============================================================
+
+[2026-08-28 11:27:51] Orden creada correctamente.
+[2026-08-28 11:27:51] commerceOrder: e8b209a0-2753-4e95-8bda-0281033b5a73
+[2026-08-28 11:27:51] flowOrder: 9962739
+[2026-08-28 11:27:51] token: AFA17D00A28D...
+[2026-08-28 11:27:51] checkout: https://sandbox.flow.cl/app/web/pay.php?token=AFA17D00A28D8B6D160C767E0F5561F20540E3AY
+
+============================================================
+
+[2026-08-28 11:27:51] ESTADO INICIAL
+
+============================================================
+
+[2026-08-28 11:27:51] CONSULTA DE ESTADO
+[2026-08-28 11:27:51] Ejecutando LAB-005.
+[2026-08-28 11:27:51] SALIDA COMPLETA DE LAB-005
+
+> lab-flow-payment@1.0.0 lab:005
+> node laboratorios/005-consulta-estado/main.js
+
+◇ injected env (2) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+LAB-005 — Consulta de estado
+Token: AFA17D00A28D...
+Consultando Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  flowOrder: 9962739,
+  commerceOrder: 'e8b209a0-2753-4e95-8bda-0281033b5a73',
+  requestDate: '2026-08-28 12:27:51',
+  status: 1,
+  subject: 'Laboratorio Flow Payment',
+  currency: 'PEN',
+  amount: '350',
+  payer: 'wuilmeralexanderbolivar@gmail.com',
+  optional: null,
+  pending_info: { media: null, date: null },
+  paymentData: {
+    date: null,
+    media: null,
+    conversionDate: null,
+    conversionRate: null,
+    amount: null,
+    currency: null,
+    fee: null,
+    balance: null,
+    transferDate: null
+  },
+  merchantId: null
+}
+[2026-08-28 11:27:51] status detectado: 1
+[2026-08-28 11:27:51] Estado inicial registrado: 1
+
+============================================================
+
+[2026-08-28 11:27:51] CHECKOUT
+[2026-08-28 11:27:51] URL: https://sandbox.flow.cl/app/web/pay.php?token=AFA17D00A28D8B6D160C767E0F5561F20540E3AY
+[2026-08-28 11:28:08] Checkout abierto por el operador.
+[2026-08-28 11:28:08] Hora de apertura: 2026-08-28 11:28:08
+
+============================================================
+
+[2026-08-28 11:28:08] ESPERANDO EXPIRACIÓN
+[2026-08-28 11:28:08] Inicio del cronómetro.
+[2026-08-28 11:28:08] Duración objetivo: 50 segundos.
+[2026-08-28 11:28:58] Cronómetro finalizado.
+[2026-08-28 11:28:58] Tiempo real transcurrido: 50 segundos.
+
+============================================================
+
+[2026-08-28 11:28:58] ESTADO POST-TIMEOUT
+
+============================================================
+
+[2026-08-28 11:28:58] CONSULTA DE ESTADO
+[2026-08-28 11:28:58] Ejecutando LAB-005.
+[2026-08-28 11:28:58] SALIDA COMPLETA DE LAB-005
+
+> lab-flow-payment@1.0.0 lab:005
+> node laboratorios/005-consulta-estado/main.js
+
+◇ injected env (2) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+LAB-005 — Consulta de estado
+Token: AFA17D00A28D...
+Consultando Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  flowOrder: 9962739,
+  commerceOrder: 'e8b209a0-2753-4e95-8bda-0281033b5a73',
+  requestDate: '2026-08-28 12:27:51',
+  status: 2,
+  subject: 'Laboratorio Flow Payment',
+  currency: 'PEN',
+  amount: '350',
+  payer: 'wuilmeralexanderbolivar@gmail.com',
+  optional: null,
+  pending_info: { media: null, date: null },
+  paymentData: {
+    date: '2026-08-28 12:28:41',
+    media: 'Pago con YAPE',
+    conversionDate: null,
+    conversionRate: null,
+    amount: '350.00',
+    currency: 'PEN',
+    fee: '13.05',
+    balance: 334.59999999999997,
+    transferDate: '2026-09-02 00:00:00',
+    taxes: 2.35
+  },
+  merchantId: null
+}
+[2026-08-28 11:28:58] status detectado: 2
+[2026-08-28 11:28:58] Estado final registrado: 2
+
+============================================================
+
+[2026-08-28 11:28:58] RESULTADO DEL EXPERIMENTO
+[2026-08-28 11:28:58] Timeout configurado: 50
+[2026-08-28 11:28:58] Tiempo esperado: 50s
+[2026-08-28 11:28:58] Estado inicial: 1
+[2026-08-28 11:28:58] Estado final: 2
+[2026-08-28 11:28:58] RESULTADO: SE OBSERVÓ UNA TRANSICIÓN DIFERENTE.
+[2026-08-28 11:28:58] Fin: 2026-08-28 11:28:58
+
+============================================================
+
+
+============================================================
+
+[2026-08-28 11:29:09] LAB-007 — NUEVO EXPERIMENTO
+[2026-08-28 11:29:09] Timeout de la orden: 50
+[2026-08-28 11:29:09] Tiempo de espera: 50 segundos
+[2026-08-28 11:29:09] Inicio: 2026-08-28 11:29:09
+
+============================================================
+
+[2026-08-28 11:29:09] CREACIÓN DE NUEVA ORDEN
+[2026-08-28 11:29:09] Timeout solicitado: 50
+[2026-08-28 11:29:09] Ejecutando: CHECKOUT_TIMEOUT=50 npm run lab:001
+
+============================================================
+
+[2026-08-28 11:29:10] SALIDA COMPLETA DE LAB-001
+
+> lab-flow-payment@1.0.0 lab:001
+> node laboratorios/001-quickstart/main.js
+
+◇ injected env (2) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+LAB-001 — Quickstart Flow
+Orden: d115f17e-ab91-4822-909c-8a61da0eee77
+Checkout timeout: 50 segundos
+Enviando solicitud a Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  token: '79D5DD408A2B590946DF14EFDD4097E157BE7ECW',
+  url: 'https://sandbox.flow.cl/app/web/pay.php',
+  flowOrder: 9962752
+}
+Checkout: https://sandbox.flow.cl/app/web/pay.php?token=79D5DD408A2B590946DF14EFDD4097E157BE7ECW
+
+============================================================
+
+[2026-08-28 11:29:10] Orden creada correctamente.
+[2026-08-28 11:29:10] commerceOrder: d115f17e-ab91-4822-909c-8a61da0eee77
+[2026-08-28 11:29:10] flowOrder: 9962752
+[2026-08-28 11:29:10] token: 79D5DD408A2B...
+[2026-08-28 11:29:10] checkout: https://sandbox.flow.cl/app/web/pay.php?token=79D5DD408A2B590946DF14EFDD4097E157BE7ECW
+
+============================================================
+
+[2026-08-28 11:29:10] ESTADO INICIAL
+
+============================================================
+
+[2026-08-28 11:29:10] CONSULTA DE ESTADO
+[2026-08-28 11:29:10] Ejecutando LAB-005.
+[2026-08-28 11:29:11] SALIDA COMPLETA DE LAB-005
+
+> lab-flow-payment@1.0.0 lab:005
+> node laboratorios/005-consulta-estado/main.js
+
+◇ injected env (2) from .env // tip: ⌘ enable debugging { debug: true }
+LAB-005 — Consulta de estado
+Token: 79D5DD408A2B...
+Consultando Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  flowOrder: 9962752,
+  commerceOrder: 'd115f17e-ab91-4822-909c-8a61da0eee77',
+  requestDate: '2026-08-28 12:29:10',
+  status: 1,
+  subject: 'Laboratorio Flow Payment',
+  currency: 'PEN',
+  amount: '350',
+  payer: 'wuilmeralexanderbolivar@gmail.com',
+  optional: null,
+  pending_info: { media: null, date: null },
+  paymentData: {
+    date: null,
+    media: null,
+    conversionDate: null,
+    conversionRate: null,
+    amount: null,
+    currency: null,
+    fee: null,
+    balance: null,
+    transferDate: null
+  },
+  merchantId: null
+}
+[2026-08-28 11:29:11] status detectado: 1
+[2026-08-28 11:29:11] Estado inicial registrado: 1
+
+============================================================
+
+[2026-08-28 11:29:11] CHECKOUT
+[2026-08-28 11:29:11] URL: https://sandbox.flow.cl/app/web/pay.php?token=79D5DD408A2B590946DF14EFDD4097E157BE7ECW
+[2026-08-28 11:30:16] Checkout abierto por el operador.
+[2026-08-28 11:30:16] Hora de apertura: 2026-08-28 11:30:16
+
+============================================================
+
+[2026-08-28 11:30:16] ESPERANDO EXPIRACIÓN
+[2026-08-28 11:30:16] Inicio del cronómetro.
+[2026-08-28 11:30:16] Duración objetivo: 50 segundos.
+[2026-08-28 11:31:06] Cronómetro finalizado.
+[2026-08-28 11:31:06] Tiempo real transcurrido: 50 segundos.
+
+============================================================
+
+[2026-08-28 11:31:06] ESTADO POST-TIMEOUT
+
+============================================================
+
+[2026-08-28 11:31:06] CONSULTA DE ESTADO
+[2026-08-28 11:31:06] Ejecutando LAB-005.
+[2026-08-28 11:31:07] SALIDA COMPLETA DE LAB-005
+
+> lab-flow-payment@1.0.0 lab:005
+> node laboratorios/005-consulta-estado/main.js
+
+◇ injected env (2) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+LAB-005 — Consulta de estado
+Token: 79D5DD408A2B...
+Consultando Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  flowOrder: 9962752,
+  commerceOrder: 'd115f17e-ab91-4822-909c-8a61da0eee77',
+  requestDate: '2026-08-28 12:29:10',
+  status: 1,
+  subject: 'Laboratorio Flow Payment',
+  currency: 'PEN',
+  amount: '350',
+  payer: 'wuilmeralexanderbolivar@gmail.com',
+  optional: null,
+  pending_info: { media: null, date: null },
+  paymentData: {
+    date: null,
+    media: null,
+    conversionDate: null,
+    conversionRate: null,
+    amount: null,
+    currency: null,
+    fee: null,
+    balance: null,
+    transferDate: null
+  },
+  merchantId: null
+}
+[2026-08-28 11:31:07] status detectado: 1
+[2026-08-28 11:31:07] Estado final registrado: 1
+
+============================================================
+
+[2026-08-28 11:31:07] RESULTADO DEL EXPERIMENTO
+[2026-08-28 11:31:07] Timeout configurado: 50
+[2026-08-28 11:31:07] Tiempo esperado: 50s
+[2026-08-28 11:31:07] Estado inicial: 1
+[2026-08-28 11:31:07] Estado final: 1
+[2026-08-28 11:31:07] RESULTADO: NO SE OBSERVÓ CAMBIO DE ESTADO.
+[2026-08-28 11:31:07] Fin: 2026-08-28 11:31:07
+
+============================================================
+
+
+============================================================
+
+[2026-08-28 11:31:27] LAB-007 — NUEVO EXPERIMENTO
+[2026-08-28 11:31:27] Timeout de la orden: 10
+[2026-08-28 11:31:27] Tiempo de espera: 10 segundos
+[2026-08-28 11:31:27] Inicio: 2026-08-28 11:31:27
+
+============================================================
+
+[2026-08-28 11:31:27] CREACIÓN DE NUEVA ORDEN
+[2026-08-28 11:31:27] Timeout solicitado: 10
+[2026-08-28 11:31:27] Ejecutando: CHECKOUT_TIMEOUT=10 npm run lab:001
+
+============================================================
+
+[2026-08-28 11:31:27] SALIDA COMPLETA DE LAB-001
+
+> lab-flow-payment@1.0.0 lab:001
+> node laboratorios/001-quickstart/main.js
+
+◇ injected env (2) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+LAB-001 — Quickstart Flow
+Orden: f35103dc-b340-490b-9639-03b69da94413
+Checkout timeout: 10 segundos
+Enviando solicitud a Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  token: '485F11C9BCEC25A3C608B43AA7380B8F913B276C',
+  url: 'https://sandbox.flow.cl/app/web/pay.php',
+  flowOrder: 9962776
+}
+Checkout: https://sandbox.flow.cl/app/web/pay.php?token=485F11C9BCEC25A3C608B43AA7380B8F913B276C
+
+============================================================
+
+[2026-08-28 11:31:27] Orden creada correctamente.
+[2026-08-28 11:31:27] commerceOrder: f35103dc-b340-490b-9639-03b69da94413
+[2026-08-28 11:31:27] flowOrder: 9962776
+[2026-08-28 11:31:27] token: 485F11C9BCEC...
+[2026-08-28 11:31:27] checkout: https://sandbox.flow.cl/app/web/pay.php?token=485F11C9BCEC25A3C608B43AA7380B8F913B276C
+
+============================================================
+
+[2026-08-28 11:31:27] ESTADO INICIAL
+
+============================================================
+
+[2026-08-28 11:31:27] CONSULTA DE ESTADO
+[2026-08-28 11:31:27] Ejecutando LAB-005.
+[2026-08-28 11:31:28] SALIDA COMPLETA DE LAB-005
+
+> lab-flow-payment@1.0.0 lab:005
+> node laboratorios/005-consulta-estado/main.js
+
+◇ injected env (2) from .env // tip: ⌘ override existing { override: true }
+LAB-005 — Consulta de estado
+Token: 485F11C9BCEC...
+Consultando Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  flowOrder: 9962776,
+  commerceOrder: 'f35103dc-b340-490b-9639-03b69da94413',
+  requestDate: '2026-08-28 12:31:27',
+  status: 1,
+  subject: 'Laboratorio Flow Payment',
+  currency: 'PEN',
+  amount: '350',
+  payer: 'wuilmeralexanderbolivar@gmail.com',
+  optional: null,
+  pending_info: { media: null, date: null },
+  paymentData: {
+    date: null,
+    media: null,
+    conversionDate: null,
+    conversionRate: null,
+    amount: null,
+    currency: null,
+    fee: null,
+    balance: null,
+    transferDate: null
+  },
+  merchantId: null
+}
+[2026-08-28 11:31:28] status detectado: 1
+[2026-08-28 11:31:28] Estado inicial registrado: 1
+
+============================================================
+
+[2026-08-28 11:31:28] CHECKOUT
+[2026-08-28 11:31:28] URL: https://sandbox.flow.cl/app/web/pay.php?token=485F11C9BCEC25A3C608B43AA7380B8F913B276C
+[2026-08-28 11:32:07] Checkout abierto por el operador.
+[2026-08-28 11:32:07] Hora de apertura: 2026-08-28 11:32:07
+
+============================================================
+
+[2026-08-28 11:32:07] ESPERANDO EXPIRACIÓN
+[2026-08-28 11:32:07] Inicio del cronómetro.
+[2026-08-28 11:32:07] Duración objetivo: 10 segundos.
+[2026-08-28 11:32:17] Cronómetro finalizado.
+[2026-08-28 11:32:17] Tiempo real transcurrido: 10 segundos.
+
+============================================================
+
+[2026-08-28 11:32:17] ESTADO POST-TIMEOUT
+
+============================================================
+
+[2026-08-28 11:32:17] CONSULTA DE ESTADO
+[2026-08-28 11:32:17] Ejecutando LAB-005.
+[2026-08-28 11:32:18] SALIDA COMPLETA DE LAB-005
+
+> lab-flow-payment@1.0.0 lab:005
+> node laboratorios/005-consulta-estado/main.js
+
+◇ injected env (2) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+LAB-005 — Consulta de estado
+Token: 485F11C9BCEC...
+Consultando Flow Sandbox...
+HTTP: 200
+Respuesta: {
+  flowOrder: 9962776,
+  commerceOrder: 'f35103dc-b340-490b-9639-03b69da94413',
+  requestDate: '2026-08-28 12:31:27',
+  status: 4,
+  subject: 'Laboratorio Flow Payment',
+  currency: 'PEN',
+  amount: '350',
+  payer: 'wuilmeralexanderbolivar@gmail.com',
+  optional: null,
+  pending_info: { media: null, date: null },
+  paymentData: {
+    date: null,
+    media: null,
+    conversionDate: null,
+    conversionRate: null,
+    amount: null,
+    currency: null,
+    fee: null,
+    balance: null,
+    transferDate: null
+  },
+  merchantId: null
+}
+[2026-08-28 11:32:18] status detectado: 4
+[2026-08-28 11:32:18] Estado final registrado: 4
+
+============================================================
+
+[2026-08-28 11:32:18] RESULTADO DEL EXPERIMENTO
+[2026-08-28 11:32:18] Timeout configurado: 10
+[2026-08-28 11:32:18] Tiempo esperado: 10s
+[2026-08-28 11:32:18] Estado inicial: 1
+[2026-08-28 11:32:18] Estado final: 4
+[2026-08-28 11:32:18] RESULTADO: TRANSICIÓN 1 → 4 CONFIRMADA.
+[2026-08-28 11:32:18] Fin: 2026-08-28 11:32:18
+
+============================================================
+

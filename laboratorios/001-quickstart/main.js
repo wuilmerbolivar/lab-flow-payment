@@ -17,6 +17,18 @@ if (!config.apiKey || !config.secretKey) {
   throw new Error('Faltan API_KEY o SECRET_KEY en .env');
 }
 
+const checkoutTimeout = process.env.CHECKOUT_TIMEOUT;
+
+if (
+  checkoutTimeout !== undefined &&
+  checkoutTimeout !== 'none' &&
+  (!/^\d+$/.test(checkoutTimeout) || Number(checkoutTimeout) <= 0)
+) {
+  throw new Error(
+    'CHECKOUT_TIMEOUT debe ser un número entero positivo o "none".',
+  );
+}
+
 const params = {
   apiKey: config.apiKey,
   commerceOrder: crypto.randomUUID(),
@@ -26,7 +38,12 @@ const params = {
   subject: 'Laboratorio Flow Payment',
   amount: 350,
   currency: 'PEN',
-  checkout_timeout: 30,
+
+  ...(checkoutTimeout !== 'none'
+    ? {
+        checkout_timeout: Number(checkoutTimeout ?? 30),
+      }
+    : {}),
 };
 
 const sortedParams = Object.entries(params)
@@ -48,6 +65,15 @@ const encodedBody = querystring.stringify(params);
 async function main() {
   console.log('LAB-001 — Quickstart Flow');
   console.log(`Orden: ${params.commerceOrder}`);
+
+  if (checkoutTimeout === 'none') {
+    console.log('Checkout timeout: no configurado');
+  } else {
+    console.log(
+      `Checkout timeout: ${params.checkout_timeout} segundos`,
+    );
+  }
+
   console.log('Enviando solicitud a Flow Sandbox...');
 
   const response = await axios.post(
