@@ -1,0 +1,48 @@
+◇ injected env (2) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+LAB-008 — Primera integración
+----------------------------------------
+Endpoint: https://sandbox.flow.cl/api/payment/create
+commerceOrder: a469602d-8abb-457f-b98d-8b2cce14a05e
+subject: Laboratorio Flow Payment
+amount: 350
+currency: PEN
+
+Generación de firma
+Parámetros ordenados:
+  amount=350
+  apiKey=1F1542...
+  commerceOrder=a469602d-8abb-457f-b98d-8b2cce14a05e
+  currency=PEN
+  email=wuilmeralexanderbolivar@gmail.com
+  subject=Laboratorio Flow Payment
+  urlConfirmation=https://example.com/confirmation
+  urlReturn=https://example.com/payment-status
+
+String-to-sign:
+amount350apiKey1F1542...commerceOrdera469602d-8abb-457f-b98d-8b2cce14a05ecurrencyPENemailwuilmeralexanderbolivar@gmail.comsubjectLaboratorio Flow PaymenturlConfirmationhttps://example.com/confirmationurlReturnhttps://example.com/payment-status
+
+Firma HMAC-SHA256:
+028490...
+
+Enviando solicitud a Flow Sandbox...
+
+Respuesta de Flow
+----------------------------------------
+HTTP: 200
+Respuesta sanitizada: {
+  token: 'DED4E5...',
+  url: 'https://sandbox.flow.cl/app/web/pay.php',
+  flowOrder: 9993109
+}
+
+Validación
+----------------------------------------
+✓ token recibido: DED4E5...
+✓ flowOrder recibido: 9993109
+✓ url recibida: https://sandbox.flow.cl/app/web/pay.php
+
+Checkout
+----------------------------------------
+https://sandbox.flow.cl/app/web/pay.php?token=DED4E5...
+
+LAB-008 completó la creación de la orden.
