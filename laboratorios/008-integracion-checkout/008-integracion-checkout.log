@@ -1,8 +1,8 @@
-◇ injected env (2) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+◇ injected env (2) from .env // tip: ⌘ override existing { override: true }
 LAB-008 — Primera integración
 ----------------------------------------
 Endpoint: https://sandbox.flow.cl/api/payment/create
-commerceOrder: a469602d-8abb-457f-b98d-8b2cce14a05e
+commerceOrder: db2e9f40-f688-4ae4-ab69-122fb89dd6e9
 subject: Laboratorio Flow Payment
 amount: 350
 currency: PEN
@@ -11,7 +11,7 @@ Generación de firma
 Parámetros ordenados:
   amount=350
   apiKey=1F1542...
-  commerceOrder=a469602d-8abb-457f-b98d-8b2cce14a05e
+  commerceOrder=db2e9f40-f688-4ae4-ab69-122fb89dd6e9
   currency=PEN
   email=wuilmeralexanderbolivar@gmail.com
   subject=Laboratorio Flow Payment
@@ -19,10 +19,10 @@ Parámetros ordenados:
   urlReturn=https://example.com/payment-status
 
 String-to-sign:
-amount350apiKey1F1542...commerceOrdera469602d-8abb-457f-b98d-8b2cce14a05ecurrencyPENemailwuilmeralexanderbolivar@gmail.comsubjectLaboratorio Flow PaymenturlConfirmationhttps://example.com/confirmationurlReturnhttps://example.com/payment-status
+amount350apiKey1F1542...commerceOrderdb2e9f40-f688-4ae4-ab69-122fb89dd6e9currencyPENemailwuilmeralexanderbolivar@gmail.comsubjectLaboratorio Flow PaymenturlConfirmationhttps://example.com/confirmationurlReturnhttps://example.com/payment-status
 
 Firma HMAC-SHA256:
-028490...
+649666...
 
 Enviando solicitud a Flow Sandbox...
 
@@ -30,19 +30,22 @@ Respuesta de Flow
 ----------------------------------------
 HTTP: 200
 Respuesta sanitizada: {
-  token: 'DED4E5...',
+  token: 'AF5481...',
   url: 'https://sandbox.flow.cl/app/web/pay.php',
-  flowOrder: 9993109
+  flowOrder: 9995378
 }
 
 Validación
 ----------------------------------------
-✓ token recibido: DED4E5...
-✓ flowOrder recibido: 9993109
+✓ token recibido: AF5481...
+✓ flowOrder recibido: 9995378
 ✓ url recibida: https://sandbox.flow.cl/app/web/pay.php
 
 Checkout
 ----------------------------------------
-https://sandbox.flow.cl/app/web/pay.php?token=DED4E5...
+https://sandbox.flow.cl/app/web/pay.php?token=AF5481...
+
+Abriendo Checkout en el navegador...
+✓ Checkout enviado al navegador.
 
 LAB-008 completó la creación de la orden.

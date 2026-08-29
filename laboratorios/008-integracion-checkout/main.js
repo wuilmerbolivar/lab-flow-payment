@@ -1,5 +1,6 @@
 const crypto = require('node:crypto');
 const querystring = require('node:querystring');
+const { execFile } = require('node:child_process');
 
 const axios = require('axios');
 const dotenv = require('dotenv');
@@ -24,10 +25,6 @@ if (!config.secretKey) {
 
 /*
  * Parámetros de la orden.
- *
- * Estos son los datos que serán enviados a:
- *
- * POST /payment/create
  */
 const params = {
   apiKey: config.apiKey,
@@ -41,15 +38,14 @@ const params = {
 };
 
 /*
- * Flow requiere ordenar los parámetros
- * alfabéticamente antes de generar la firma.
+ * Ordenamiento alfabético de parámetros.
  */
 const sortedParams = Object.entries(params).sort(
   ([keyA], [keyB]) => keyA.localeCompare(keyB),
 );
 
 /*
- * Construcción de la cadena que será firmada:
+ * String utilizado para generar la firma.
  *
  * nombre + valor
  *
@@ -60,9 +56,7 @@ const toSign = sortedParams
   .join('');
 
 /*
- * Firma HMAC-SHA256 utilizando SECRET_KEY.
- *
- * secretKey NO se envía a Flow.
+ * Firma HMAC-SHA256.
  */
 const signature = crypto
   .createHmac('sha256', config.secretKey)
@@ -70,55 +64,76 @@ const signature = crypto
   .digest('hex');
 
 /*
- * La firma se agrega al conjunto final
- * de parámetros como "s".
+ * La firma se agrega a los parámetros enviados.
  */
 params.s = signature;
 
 /*
- * Flow espera:
- *
- * application/x-www-form-urlencoded
+ * Flow espera application/x-www-form-urlencoded.
  */
 const encodedBody = querystring.stringify(params);
 
 /*
- * Ocultamos información sensible antes
- * de mostrarla en consola o almacenarla
- * como evidencia.
+ * Sanitización para consola/log.
+ *
+ * Se utiliza únicamente para mostrar información.
+ * Los valores originales permanecen intactos para la solicitud.
  */
 function mask(value, visibleCharacters = 6) {
   if (!value) {
     return '(no disponible)';
   }
 
-  const stringValue = String(value);
-
-  if (stringValue.length <= visibleCharacters) {
+  if (value.length <= visibleCharacters) {
     return '***';
   }
 
-  return `${stringValue.slice(0, visibleCharacters)}...`;
+  return `${value.slice(0, visibleCharacters)}...`;
 }
 
 /*
- * Genera una representación segura de la respuesta
- * de Flow para utilizarla como evidencia.
+ * Abre una URL en el navegador predeterminado.
  *
- * El token completo nunca debe aparecer en el log.
+ * Linux:
+ * xdg-open
+ *
+ * macOS:
+ * open
+ *
+ * Windows:
+ * cmd /c start
  */
-function sanitizeResponse(data) {
-  if (!data || typeof data !== 'object') {
-    return data;
+function openBrowser(url) {
+  let command;
+  let args;
+
+  if (process.platform === 'linux') {
+    command = 'xdg-open';
+    args = [url];
+  } else if (process.platform === 'darwin') {
+    command = 'open';
+    args = [url];
+  } else if (process.platform === 'win32') {
+    command = 'cmd';
+    args = ['/c', 'start', '', url];
+  } else {
+    throw new Error(
+      `No se puede abrir el navegador automáticamente en ${process.platform}.`,
+    );
   }
 
-  return {
-    ...data,
-    token: data.token ? mask(data.token) : undefined,
-  };
+  execFile(command, args, (error) => {
+    if (error) {
+      console.error(
+        `No fue posible abrir el navegador: ${error.message}`,
+      );
+    }
+  });
 }
 
 async function main() {
+  const shouldOpen = process.argv.includes('--open');
+
   console.log('LAB-008 — Primera integración');
   console.log('----------------------------------------');
 
@@ -132,9 +147,6 @@ async function main() {
   console.log('Parámetros ordenados:');
 
   for (const [key, value] of sortedParams) {
-    /*
-     * No mostrar API_KEY completa.
-     */
     const displayValue =
       key === 'apiKey' ? mask(value) : value;
 
@@ -168,6 +180,16 @@ async function main() {
   const data = response.data;
 
   /*
+   * No imprimir la respuesta completa porque contiene
+   * el token necesario para acceder al Checkout.
+   */
+  console.log('Respuesta sanitizada:', {
+    token: mask(data.token),
+    url: data.url,
+    flowOrder: data.flowOrder,
+  });
+
+  /*
    * Validación mínima de la respuesta.
    */
   if (!data || typeof data !== 'object') {
@@ -195,26 +217,12 @@ async function main() {
   }
 
   /*
-   * Mostrar únicamente una versión sanitizada
-   * de la respuesta.
-   */
-  console.log(
-    'Respuesta sanitizada:',
-    sanitizeResponse(data),
-  );
-
-  /*
    * Construcción del Checkout.
    *
-   * checkoutUrl contiene el token real porque será
-   * utilizado posteriormente por la integración.
+   * Esta URL contiene el token completo y solamente debe
+   * utilizarse localmente para abrir el Checkout.
    */
   const checkoutUrl = `${data.url}?token=${data.token}`;
-
-  /*
-   * Versión segura para consola y logs.
-   */
-  const safeCheckoutUrl = `${data.url}?token=${mask(data.token)}`;
 
   console.log('\nValidación');
   console.log('----------------------------------------');
@@ -224,20 +232,33 @@ async function main() {
 
   console.log('\nCheckout');
   console.log('----------------------------------------');
-  console.log(safeCheckoutUrl);
 
   /*
-   * Verificación interna:
+   * Nunca mostrar el token completo en stdout.
    *
-   * checkoutUrl se construye utilizando el token real.
+   * Esto mantiene el log sanitizado cuando se utiliza:
    *
-   * No mostramos checkoutUrl porque contiene
-   * información que no debe almacenarse en logs.
+   * node main.js | tee archivo.log
    */
-  if (!checkoutUrl.includes(data.token)) {
-    throw new Error(
-      'No fue posible construir correctamente la URL del Checkout.',
-    );
+  console.log(
+    `${data.url}?token=${mask(data.token)}`,
+  );
+
+  if (shouldOpen) {
+    console.log('\nAbriendo Checkout en el navegador...');
+
+    /*
+     * El token completo se utiliza únicamente como argumento
+     * local para xdg-open/open/cmd.
+     *
+     * No se imprime en consola.
+     */
+    openBrowser(checkoutUrl);
+
+    console.log('✓ Checkout enviado al navegador.');
+  } else {
+    console.log('\nPara abrir el Checkout:');
+    console.log('node laboratorios/008-integracion-checkout/main.js --open');
   }
 
   console.log('\nLAB-008 completó la creación de la orden.');
@@ -249,10 +270,7 @@ main().catch((error) => {
 
   if (error.response) {
     console.error('HTTP:', error.response.status);
-    console.error(
-      'Respuesta de Flow:',
-      sanitizeResponse(error.response.data),
-    );
+    console.error('Respuesta de Flow:', error.response.data);
   } else {
     console.error(error.message);
   }
